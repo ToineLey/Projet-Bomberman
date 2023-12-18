@@ -1,5 +1,6 @@
 import pyxel
 from Jules import *
+from Backend import *
 
 class Jeu:
     def __init__(self):
