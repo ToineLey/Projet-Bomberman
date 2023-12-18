@@ -9,9 +9,9 @@ class Bomber:
 
     def dropbomb(self):
         "pose d'une bombe si possible"
-        if self.cool_down == 0 and self.grille.cases[self.x][self.y].bomb == False:
+        if self.cool_down == 0 and self.grille.cases[self.y][self.x].bomb == False:
             Bomb(self.x, self.y)
-            self.grille.cases[self.x][self.y].bomb = True
+            self.grille.cases[self.y][self.x].bomb = True
             cool_down = 100
 
     def goto(self, x, y):
@@ -23,28 +23,28 @@ class Bomber:
         "deplacement vers la gauche"
         x = self.x - 1
         y = self.y
-        if self.grille.cases[x][y]..est_libre():
+        if self.grille.cases[y][x].est_libre():
             self.goto(x,y)
 
     def droite(self):
         "deplacement vers la droite"
         x = self.x + 1
         y = self.y
-        if self.grille.cases[x][y]..est_libre():
+        if self.grille.cases[y][x].est_libre():
             self.goto(x,y)
 
     def haut(self):
         "deplacement vers le haut"
         x = self.x
         y = self.y - 1
-        if self.grille.cases[x][y].est_libre():
+        if self.grille.cases[y][x].est_libre():
             self.goto(x,y)
 
     def bas(self):
         "deplacement vers le bas"
         x = self.x
         y = self.y + 1
-        if self.grille.cases[x][y].est_libre():
+        if self.grille.cases[y][x].est_libre():
             self.goto(x,y)
 
 
