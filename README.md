@@ -1,7 +1,7 @@
 # Projet-Bomberman
 
 ## TOINE
-```markdown
+
 - Fonction `get_explosions` à définir :
   ```python
   def get_explosions(self: Grille) -> List[Case where explode == True]:
