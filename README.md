@@ -1,36 +1,41 @@
 # Projet-Bomberman
 
-TOINE
-get explosions à definir
-=> get_explosions(self : Grille) -> List[Case where explode == True]
+## TOINE
+```markdown
+- Fonction `get_explosions` à définir :
+  ```python
+  def get_explosions(self: Grille) -> List[Case where explode == True]:
+  ```
 
-ajout d'un attribut all_bombs dans la grille qui recense toutes les bombes de la grille
-=> List[Bomb]
+- Ajout d'un attribut `all_bombs` dans la grille qui recense toutes les bombes de la grille :
+  ```python
+  all_bombs: List[Bomb]
+  ```
 
-get à definir
-=> get(self: Grille, x, y) -> Case
-/!\ inversion abscisse et ordonnee dans la recherche par indice dans self.cases (self.cases[y][x])
+- Fonction `get` à définir, avec inversion abscisse et ordonnée dans la recherche par indice dans `self.cases` (self.cases[y][x]) :
+  ```python
+  def get(self: Grille, x, y) -> Case:
+  ```
 
+## JULES
 
-JULES
-ligne 41 à 75 dans Backend à optimiser/reduire
+- Lignes 41 à 75 dans Backend à optimiser/réduire.
 
-mouvement du Bomber à modifier
-=> deplacement par pixel plutot que par case
-=> appartenance aux cases donc a revoir egalement (comment le changement de case est detecte, mise a jour de case.bomber)
+- Mouvement du Bomber à modifier :
+  - Déplacement par pixel plutôt que par case.
+  - Appartenance aux cases donc à revoir également (comment le changement de case est détecté, mise à jour de `case.bomber`).
 
-test du travail effectué jusqu'ici (si possible)
+- Test du travail effectué jusqu'ici (si possible).
 
+## SUITE
 
-SUITE
-travail de l'interface avec pyxel:
-- recherches animations
-- developpement des methodes
-- test/debuggage (IMPORTANT)
-FIN
-- documentation, commentaires (présentation)
+- Travail de l'interface avec pyxel :
+  - Recherches animations.
+  - Développement des méthodes.
+  - Test/débogage (IMPORTANT) FIN.
+  - Documentation, commentaires (présentation).
 
+## ANNEXES
+```
 
-/!\ PB AU NIVEAU DU GITHUB ?
-IMPRESSION QUE TON TRAVAIL DU 18/12 N'A PAS ETE AJOUTE
-avéré ?
+N'oubliez pas de remplacer les sections telles que `Grille`, `Case`, `Bomb`, etc., par les détails spécifiques à votre projet. Assurez-vous également d'ajouter des explications supplémentaires ou des exemples de code si nécessaire.
