@@ -1,10 +1,12 @@
+from Toine import Grille
+
 class Bomber:
     def __init__(self, name, x, y, grille):
+        self.grille = grille
         self.x = x
         self.y = y
         self.username = name
         self.dead = False
-        self.grille = grille
         self.cool_down = 100
 
     def dropbomb(self):

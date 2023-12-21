@@ -27,23 +27,38 @@
   def get(self: Grille, x, y) -> Case:
   ```
 
+- Fonction `get_explosions` à définir
+```python
+def get_explosions(self: Grille) -> List[Case]
+```
+
 ## JULES
 
-- Lignes 41 à 75 dans Backend à optimiser/réduire.
-
-- Mouvement du Bomber à modifier :
-  - Déplacement par pixel plutôt que par case.
-  - Appartenance aux cases donc à revoir également (comment le changement de case est détecté, mise à jour de `case.bomber`).
+- Optimisation update_explosions
 
 - Test du travail effectué jusqu'ici (si possible).
+
+- Interface:
+  - update:
+    - deplacement bomber
+    - manage_bombs /!\ a définir
+    - test fin de partie
+  -draw :
+    - afficher les bombers
+    - afficher les bombes
+    - animations des explosions
+    - animations deplacements
+    - animation fin de partie
+
+  - (temps d'explosion a gerer)
 
 ## SUITE
 
 - Travail de l'interface avec pyxel :
   - Recherches animations.
   - Développement des méthodes.
-  - Test/débogage (IMPORTANT) FIN.
-  - Documentation, commentaires (présentation).
+- Test/débogage (IMPORTANT) FIN.
+- Documentation, commentaires (présentation).
 
 ## ANNEXES
 
@@ -55,4 +70,3 @@ Assurez-vous également d'ajouter des explications supplémentaires ou des exemp
 
 - [Toine Leydert](https://github.com/ToineLey)
 - [Jules Audouin](https://github.com/juesaudouin)
-

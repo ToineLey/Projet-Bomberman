@@ -1,6 +1,5 @@
 from random import randint
 from Jules import *
-from pip._vendor.platformdirs import user_videos_dir
 
 
 class Grille:
@@ -8,6 +7,8 @@ class Grille:
         self.hauteur = h
         self.largeur = l
         self.cases = [[j for j in range(l)] for _ in range(h)]
+        self.exploding_bombs = []
+        self.all_bombs = []
 
     def _remplir(self):
         def ot():
@@ -47,13 +48,13 @@ class Grille:
 
     def get(self, x: int, y: int):
         return self.cases[y][x]
-"""
+
     def update_bomb(self):
         "compte a rebour des bombes"
-        for bomb in all_bombs:
+        for bomb in self.all_bombs:
             bomb.rebour()
             if bomb.timer == 0:
-                exploding_bomb.append(bomb)
+                self.exploding_bomb.append(bomb)
 
     def update_explosions(self, x, y):
         "met a jour les cases en cours d'explosion autour de celle au coordonees x,y"
@@ -61,42 +62,42 @@ class Grille:
         case = self.get(x, y)
         i = 1
 
-        ## Partie qui suit à optimiser ##
+        # Partie qui suit à optimiser (jusqu'à la ligne 100)
 
         while i <= Bomb.portee:
             current_case = self.get(x, y+i)
             current_case.explode = True
             if current_case.bomb != None:
-                exploding_bomb.append(current_case.bomb)
+                self.exploding_bomb.append(current_case.bomb)
                 break
-            elif current_case.terrain == Terrain.pilier:
+            elif current_case.terrain == Terrain.PILIER:
                 break
         i = 1
         while i <= Bomb.portee:
             current_case = self.get(x, y-i)
             current_case.explode = True
             if current_case.bomb != None:
-                exploding_bomb.append(current_case.bomb)
+                self.exploding_bomb.append(current_case.bomb)
                 break
-            elif current_case.terrain == Terrain.pilier:
+            elif current_case.terrain == Terrain.PILIER:
                 break
         i = 1
         while i <= Bomb.portee:
             current_case = self.get(x+i, y)
             current_case.explode = True
             if current_case.bomb != None:
-                exploding_bomb.append(current_case.bomb)
+                self.exploding_bomb.append(current_case.bomb)
                 break
-            elif current_case.terrain == Terrain.pilier:
+            elif current_case.terrain == Terrain.PILIER:
                 break
         i = 1
         while i <= Bomb.portee:
             current_case = self.get(x-i, y)
             current_case.explode = True
             if current_case.bomb != None:
-                exploding_bomb.append(current_case.bomb)
+                self.exploding_bomb.append(current_case.bomb)
                 break
-            elif current_case.terrain == Terrain.pilier:
+            elif current_case.terrain == Terrain.PILIER:
                 break
 
     def bombs_explosion(self):
@@ -107,9 +108,12 @@ class Grille:
 
     def explosions(self):
         "explosions des cases"
-        for case in get_explosions():
+        for case in self.get_explosions():
             case.explode()
-"""
+        for bomb in self.expoding_bombs:
+            self.all_bombs.remove(bomb)
+        self.exploding_bombs = []
+
 
 class Terrain:
     LISTE = (0, 1, 2)
@@ -138,8 +142,8 @@ class Case:
         """return self.terrain"""
 
     def explode(self):
-        if self.terrain == Terrain.brique:
-            self.terrain = Terrain.vide
+        if self.terrain == Terrain.BRIQUE:
+            self.terrain = Terrain.VIDE
         elif self.player != None:
             self.player.dead = True
         self.bomb = None
