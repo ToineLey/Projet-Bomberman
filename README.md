@@ -62,10 +62,11 @@ def get_explosions(self: Grille) -> List[Case]
 
 ## ANNEXES
 
-```
+
 N'oubliez pas de remplacer les sections telles que `Grille`, `Case`, `Bomb`, etc., par les détails spécifiques à votre projet. 
 Assurez-vous également d'ajouter des explications supplémentaires ou des exemples de code si nécessaire.
-```
+
+
 ## AUTEURS
 
 - [Toine Leydert](https://github.com/ToineLey)
