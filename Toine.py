@@ -1,6 +1,5 @@
 from random import randint
 from Jules import *
-from pip._vendor.platformdirs import user_videos_dir
 
 
 class Grille:
@@ -12,29 +11,29 @@ class Grille:
     def _remplir(self):
         def ot():
             return (
-                n not in (0, self.largeur-1) and
-                a not in (0, self.hauteur-1) and
-                a % 2 != 0 and
-                n % 2 != 0
+                x not in (0, self.largeur-1) and
+                y not in (0, self.hauteur-1) and
+                y % 2 != 0 and
+                x % 2 != 0
             )
 
         def at():
             return (
-                a in (0, 1) and
-                n in (0, 1, self.largeur-2, self.largeur-1)
+                y in (0, 1) and
+                x in (0, 1, self.largeur-2, self.largeur-1)
             )
-        for a in range(len(self.cases)):
-            for n in self.cases[a]:
+        for y in range(len(self.cases)):
+            for x in self.cases[y]:
                 alea = randint(1, 100)
                 if ot():
-                    self.cases[a][n] = Case(a, n, Terrain.PILIER)
+                   self.cases[y][x] = Case(y, x, Terrain.PILIER)
                 elif at():
-                    self.cases[a][n] = Case(a, n, Terrain.VIDE)
+                    self.cases[y][x] = Case(y, x, Terrain.VIDE)
                 else:
                     if alea <= 20:
-                        self.cases[a][n] = Case(a, n, Terrain.VIDE)
+                        self.cases[y][x] = Case(y, x, Terrain.VIDE)
                     else:
-                        self.cases[a][n] = Case(a, n, Terrain.BRIQUE)
+                        self.cases[y][x] = Case(y, x, Terrain.BRIQUE)
 
     def _affichage(self):
         t2 = []
@@ -47,6 +46,7 @@ class Grille:
 
     def get(self, x: int, y: int):
         return self.cases[y][x]
+
 """
     def update_bomb(self):
         "compte a rebour des bombes"
@@ -135,7 +135,8 @@ class Case:
             return '  '
         elif self.terrain == 2:
             return '██'
-        """return self.terrain"""
+    def terraininfy(self):
+        return self.terrain
 
     def explode(self):
         if self.terrain == Terrain.brique:
@@ -143,10 +144,3 @@ class Case:
         elif self.player != None:
             self.player.dead = True
         self.bomb = None
-
-
-a = Grille(13, 11)
-a._remplir()
-b = a._affichage()
-for i in range(len(a.cases)):
-    print(b[i])
