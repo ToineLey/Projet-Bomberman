@@ -49,12 +49,13 @@ class Grille:
     def get(self, x: int, y: int):
         return self.cases[y][x]
 
-    def get_explosion(self):
+    def get_explosions(self):
         c = []
         for a in range(len(self.cases)):
             for el in self.cases[a]:
                 if el.explode:
                     c.append(el)
+        return c
 
     def update_bomb(self):
         "compte a rebour des bombes"
@@ -117,14 +118,14 @@ class Grille:
         "explosions des cases"
         for case in self.get_explosions():
             case.explode()
-        for bomb in self.expoding_bombs:
+        for bomb in self.exploding_bombs:
             self.all_bombs.remove(bomb)
         self.exploding_bombs = []
 
     def manage_bombs(self):
         self.update_bomb()
         self.bombs_explosion()
-        self.exposions()
+        self.explosions()
 
 
 class Terrain:
@@ -141,16 +142,18 @@ class Case:
         self.terrain = t
         self.bomb = False
         self.explosion = False
-        self.player = ''
+        self.player = None
 
     def __str__(self):
         # Ces lignes servent uniquement pour les tests (pour que cela soit plus visuel,je l'accorde ça sert à rien)
         if self.terrain == 1:
             return '▒▒'
-        elif self.terrain == 0:
+        elif self.terrain == 0 and self.player is None:
             return '  '
         elif self.terrain == 2:
             return '██'
+        elif self.player is not None:
+            return '()'
 
     def terraininfy(self):
         return self.terrain
