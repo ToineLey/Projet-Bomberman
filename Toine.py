@@ -73,7 +73,7 @@ class Grille:
 
         while i <= Bomb.portee:
             current_case = self.get(x, y+i)
-            current_case.explode = True
+            current_case.explosion = True
             if current_case.bomb != None:
                 self.exploding_bomb.append(current_case.bomb)
                 break
@@ -82,7 +82,7 @@ class Grille:
         i = 1
         while i <= Bomb.portee:
             current_case = self.get(x, y-i)
-            current_case.explode = True
+            current_case.explosion = True
             if current_case.bomb != None:
                 self.exploding_bomb.append(current_case.bomb)
                 break
@@ -91,7 +91,7 @@ class Grille:
         i = 1
         while i <= Bomb.portee:
             current_case = self.get(x+i, y)
-            current_case.explode = True
+            current_case.explosion = True
             if current_case.bomb != None:
                 self.exploding_bomb.append(current_case.bomb)
                 break
@@ -100,7 +100,7 @@ class Grille:
         i = 1
         while i <= Bomb.portee:
             current_case = self.get(x-i, y)
-            current_case.explode = True
+            current_case.explosion = True
             if current_case.bomb != None:
                 self.exploding_bomb.append(current_case.bomb)
                 break
@@ -120,6 +120,11 @@ class Grille:
         for bomb in self.expoding_bombs:
             self.all_bombs.remove(bomb)
         self.exploding_bombs = []
+
+    def manage_bombs(self):
+        self.update_bomb()
+        self.bombs_explosion()
+        self.exposions()
 
 
 class Terrain:
