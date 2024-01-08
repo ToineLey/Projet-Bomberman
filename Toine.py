@@ -28,7 +28,7 @@ class Grille:
             for x in self.cases[y]:
                 alea = randint(1, 100)
                 if ot():
-                   self.cases[y][x] = Case(y, x, Terrain.PILIER)
+                    self.cases[y][x] = Case(y, x, Terrain.PILIER)
                 elif at():
                     self.cases[y][x] = Case(y, x, Terrain.VIDE)
                 else:
@@ -48,6 +48,13 @@ class Grille:
 
     def get(self, x: int, y: int):
         return self.cases[y][x]
+
+    def get_explosion(self):
+        c = []
+        for a in range(len(self.cases)):
+            for el in self.cases[a]:
+                if el.explode:
+                    c.append(el)
 
     def update_bomb(self):
         "compte a rebour des bombes"
@@ -127,9 +134,9 @@ class Case:
         self.x = x
         self.y = y
         self.terrain = t
-        self.bomb = 3
-        self.explode = 4
-        self.player = 5
+        self.bomb = False
+        self.explosion = False
+        self.player = False
 
     def __str__(self):
         # Ces lignes servent uniquement pour les tests (pour que cela soit plus visuel,je l'accorde ça sert à rien)
@@ -139,6 +146,7 @@ class Case:
             return '  '
         elif self.terrain == 2:
             return '██'
+
     def terraininfy(self):
         return self.terrain
 
@@ -148,3 +156,6 @@ class Case:
         elif self.player != None:
             self.player.dead = True
         self.bomb = None
+
+
+

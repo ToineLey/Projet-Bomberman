@@ -7,7 +7,8 @@ TAILLE=50
 
 class Jeu:
     def __init__(self):
-        pyxel.init(650, 550)
+        pyxel.init(104, 88)
+        pyxel.load("resources.pyxres")
         self.grille = Grille(13, 11)
         self.grille._remplir()
         pyxel.run(self.update,self.draw)
@@ -18,13 +19,10 @@ class Jeu:
         for h in range(len(self.grille.cases)):
             for l in range(len(self.grille.cases[h-1])):
                 casee = self.grille.cases[h][l]
-                if casee.terrain == 0:
-                    col = 0
-                elif casee.terrain == 1:
-                    col = 9
-                else:
-                    col = 2
-                pyxel.rect(l*TAILLE,h*TAILLE,(l+1)*TAILLE,(h+1)*TAILLE,col)
+                if casee.terrain == 1:
+                    pyxel.blt(l*8,h*8,0,16,0,8,8)
+                elif casee.terrain == 2:
+                    pyxel.blt(l*8,h*8,0,0,0,8,8)
 
 
 Jeu()
