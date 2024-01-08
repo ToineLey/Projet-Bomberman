@@ -66,7 +66,7 @@ class Grille:
 
         while i <= Bomb.portee:
             current_case = self.get(x, y+i)
-            current_case.explode = True
+            current_case.explosion = True
             if current_case.bomb != None:
                 self.exploding_bomb.append(current_case.bomb)
                 break
@@ -75,7 +75,7 @@ class Grille:
         i = 1
         while i <= Bomb.portee:
             current_case = self.get(x, y-i)
-            current_case.explode = True
+            current_case.explosion = True
             if current_case.bomb != None:
                 self.exploding_bomb.append(current_case.bomb)
                 break
@@ -84,7 +84,7 @@ class Grille:
         i = 1
         while i <= Bomb.portee:
             current_case = self.get(x+i, y)
-            current_case.explode = True
+            current_case.explosion = True
             if current_case.bomb != None:
                 self.exploding_bomb.append(current_case.bomb)
                 break
@@ -93,7 +93,7 @@ class Grille:
         i = 1
         while i <= Bomb.portee:
             current_case = self.get(x-i, y)
-            current_case.explode = True
+            current_case.explosion = True
             if current_case.bomb != None:
                 self.exploding_bomb.append(current_case.bomb)
                 break
@@ -114,6 +114,11 @@ class Grille:
             self.all_bombs.remove(bomb)
         self.exploding_bombs = []
 
+    def manage_bombs(self):
+        self.update_bomb()
+        self.bombs_explosion()
+        self.exposions()
+
 
 class Terrain:
     LISTE = (0, 1, 2)
@@ -127,9 +132,9 @@ class Case:
         self.x = x
         self.y = y
         self.terrain = t
-        self.bomb = 3
-        self.explode = 4
-        self.player = 5
+        self.bomb = False
+        self.explosion = False
+        self.player = False
 
     def __str__(self):
         # Ces lignes servent uniquement pour les tests (pour que cela soit plus visuel,je l'accorde ça sert à rien)
