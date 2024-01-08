@@ -141,7 +141,7 @@ class Case:
         self.terrain = t
         self.bomb = False
         self.explosion = False
-        self.player = False
+        self.player = ''
 
     def __str__(self):
         # Ces lignes servent uniquement pour les tests (pour que cela soit plus visuel,je l'accorde ça sert à rien)

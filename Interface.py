@@ -40,7 +40,7 @@ class Jeu:
                 self.player1.dropbomb()
             if pyxel.btn(pyxel.KEY_1):
                 self.player2.dropbomb()
-        
+            
             self.grille.manage_bombs()
             self.draw()
 
@@ -59,6 +59,10 @@ class Jeu:
                     pyxel.blt(l*8,h*8,0,16,0,8,8)
                 elif casee.terrain == 2:
                     pyxel.blt(l*8,h*8,0,0,0,8,8)
+                elif casee.player == 'player1':
+                    pyxel.blt(l*8,h*8,1,0,0,8,8)
+                elif casee.player == 'player2':
+                    pyxel.blt(l*8,h*8,1,16,0,8,8)
 
 
 Jeu()
