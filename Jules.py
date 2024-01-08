@@ -20,12 +20,14 @@ class Bomber:
         "deplace le joueur en x,y"
         self.x = x
         self.y = y
+        self.grille.cases[y][x].player = self.username
 
     def gauche(self):
         "deplacement vers la gauche"
         x = self.x - 1
         y = self.y
         if self.grille.cases[y][x].est_libre():
+            self.grille.cases[y][x].player = ''
             self.goto(x,y)
 
     def droite(self):
@@ -33,6 +35,7 @@ class Bomber:
         x = self.x + 1
         y = self.y
         if self.grille.cases[y][x].est_libre():
+            self.grille.cases[y][x].player = ''
             self.goto(x,y)
 
     def haut(self):
@@ -40,6 +43,7 @@ class Bomber:
         x = self.x
         y = self.y - 1
         if self.grille.cases[y][x].est_libre():
+            self.grille.cases[y][x].player = ''
             self.goto(x,y)
 
     def bas(self):
@@ -47,6 +51,7 @@ class Bomber:
         x = self.x
         y = self.y + 1
         if self.grille.cases[y][x].est_libre():
+            self.grille.cases[y][x].player = ''
             self.goto(x,y)
 
 
