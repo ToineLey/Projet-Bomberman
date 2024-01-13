@@ -1,7 +1,6 @@
 import pyxel
-from Jules import *
-from Toine import *
-
+from Bomber import bomber
+from Grille import grille
 
 LARG=16
 
@@ -17,51 +16,33 @@ class Jeu:
         pyxel.run(self.update,self.draw)
 
     def update(self):
-        if self.fin_de_partie == False:
-            if pyxel.btn(pyxel.KEY_Z):
-                self.player1.haut()
-            elif pyxel.btn(pyxel.KEY_D):
-                self.player1.droite()
-            elif pyxel.btn(pyxel.KEY_Q):
-                self.player1.gauche()
-            elif pyxel.btn(pyxel.KEY_S):
-                self.player1.bas()
-            if pyxel.btn(pyxel.KEY_UP):
-                self.player2.haut()
-            elif pyxel.btn(pyxel.KEY_RIGHT):
-                self.player2.droite()
-            elif pyxel.btn(pyxel.KEY_LEFT):
-                self.player2.gauche()
-            elif pyxel.btn(pyxel.KEY_DOWN):
-                self.player2.bas()
-        
-            if pyxel.btn(pyxel.KEY_E):
-                self.player1.dropbomb()
-            if pyxel.btn(pyxel.KEY_1):
-                self.player2.dropbomb()
-            
-            self.grille.manage_bombs()
-            self.draw()
+        self.player1.deplacement(pyxel.KEY_Z, pyxel.KEY_S, pyxel.KEY_D, pyxel.KEY_Q)
+        self.player2.deplacement(pyxel.KEY_UP, pyxel.KEY_DOWN, pyxel.KEY_RIGHT, pyxel.KEY_LEFT)
 
-            self.fin_de_partie = self.player1.dead == True or self.player2.dead == True
+        self.player1.dropbomb(pyxel.KEY_E)
+        self.player2.dropbomb(pyxel.KEY_1)
 
-        else:
-            pyxel.show()
+        self.grille.manage_bombs()
+
+        self.fin_de_partie = self.player1.dead == True or self.player2.dead == True
            
 
     def draw(self):
-        pyxel.cls(0)
-        for h in range(len(self.grille.cases)):
-            for l in range(len(self.grille.cases[h-1])):
-                casee = self.grille.cases[h][l]
-                if casee.terrain == 1:
-                    pyxel.blt(l*LARG,h*LARG,0,32,0,LARG,LARG)
-                elif casee.terrain == 2:
-                    pyxel.blt(l*LARG,h*LARG,0,0,0,LARG,LARG)
-                elif casee.player == self.player1:
-                    pyxel.blt(l*LARG,h*LARG,1,0,0,LARG,LARG)
-                elif casee.player == self.player2:
-                    pyxel.blt(l*LARG,h*LARG,1,32,0,LARG,LARG)
+        if self.fin_de_partie == False:
+            pyxel.cls(0)
+            for h in range(len(self.grille.cases)):
+                for l in range(len(self.grille.cases[h-1])):
+                    casee = self.grille.cases[h][l]
+                    if casee.terrain == 1:
+                        pyxel.blt(l*LARG,h*LARG,0,32,0,LARG,LARG)
+                    elif casee.terrain == 2:
+                        pyxel.blt(l*LARG,h*LARG,0,0,0,LARG,LARG)
+                    elif casee.player == self.player1:
+                        pyxel.blt(l*LARG,h*LARG,1,0,0,LARG,LARG)
+                    elif casee.player == self.player2:
+                        pyxel.blt(l*LARG,h*LARG,1,32,0,LARG,LARG)
+        else:
+            pyxel.text(50, 64, 'GAME OVER', 7)
 
 
 Jeu()
