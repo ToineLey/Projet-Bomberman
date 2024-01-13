@@ -68,7 +68,7 @@ class Grille:
         "met a jour les cases en cours d'explosion autour de celle au coordonees x,y"
 
         case = self.get(x, y)
-        case.explosion = 30
+        case.explosion = 15
         i = 1
 
         # Partie qui suit à optimiser (jusqu'à la ligne 100)
@@ -84,7 +84,7 @@ class Grille:
         i = 1
         while i <= Bomb.portee:
             current_case = self.get(x, y-i)
-            current_case.explosion = 30
+            current_case.explosion = 15
             if current_case.bomb != None:
                 self.exploding_bomb.append(current_case.bomb)
                 break
@@ -93,7 +93,7 @@ class Grille:
         i = 1
         while i <= Bomb.portee:
             current_case = self.get(x+i, y)
-            current_case.explosion = 30
+            current_case.explosion = 15
             if current_case.bomb != None:
                 self.exploding_bomb.append(current_case.bomb)
                 break
@@ -102,7 +102,7 @@ class Grille:
         i = 1
         while i <= Bomb.portee:
             current_case = self.get(x-i, y)
-            current_case.explosion = 30
+            current_case.explosion = 15
             if current_case.bomb != None:
                 self.exploding_bomb.append(current_case.bomb)
                 break

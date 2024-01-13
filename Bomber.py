@@ -8,7 +8,7 @@ class Bomber:
         self.y = y
         self.username = name
         self.dead = False
-        self.cool_down = 100
+        self.cool_down = 60
         self.grille.cases[y][x].player = self
 
     def dropbomb(self, key):
@@ -17,7 +17,7 @@ class Bomber:
             if self.cool_down == 0 and self.grille.cases[self.y][self.x].bomb == False:
                 Bomb(self.x, self.y)
                 self.grille.cases[self.y][self.x].bomb = True
-                cool_down = 100
+                cool_down = 60
 
     def goto(self, x, y):
         "deplace le joueur en x,y"
