@@ -1,6 +1,6 @@
 import pyxel
-from Bomber import bomber
-from Grille import grille
+from Bomber import Bomber
+from Grille import Grille
 
 LARG=16
 
