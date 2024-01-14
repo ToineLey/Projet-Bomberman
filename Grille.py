@@ -10,30 +10,39 @@ class Grille:
     def __init__(self, l: int, h: int):
         self.hauteur = h
         self.largeur = l
-        self.cases = [[j for j in range(l)] for _ in range(h)]
+        self.cases = [[j for j in range(l+2)] for _ in range(h+2)]
         self.exploding_bombs = []
         self.all_bombs = []
 
     def _remplir(self):
-        def ot():
+        hauteur = self.hauteur+2
+        largeur = self.largeur+2
+        def espacement_piliers():          
             return (
-                x not in (0, self.largeur-1) and
-                y not in (0, self.hauteur-1) and
-                y % 2 != 0 and
-                x % 2 != 0
+                x not in (1, largeur-2) and
+                y not in (1, hauteur-2) and
+                y % 2 == 0 and
+                x % 2 == 0
             )
 
-        def at():
+        def depart():
             return (
-                y in (0, 1) and
-                x in (0, 1, self.largeur-2, self.largeur-1)
+                y in (1, 2) and
+                x in (1, 2, largeur-3, largeur-2)
+            )
+        def contour():
+            return (
+                x in (0,largeur-1) or
+                y in (0,hauteur-1)
             )
         for y in range(len(self.cases)):
             for x in self.cases[y]:
                 alea = randint(1, 100)
-                if ot():
+                if contour():
                     self.cases[y][x] = Case(y, x, Terrain.PILIER)
-                elif at():
+                elif espacement_piliers():
+                    self.cases[y][x] = Case(y, x, Terrain.PILIER)
+                elif depart():
                     self.cases[y][x] = Case(y, x, Terrain.VIDE)
                 else:
                     if alea <= 20:
@@ -130,4 +139,3 @@ class Grille:
         self.update_bomb()
         self.bombs_explosion()
         self.explosions()
-
