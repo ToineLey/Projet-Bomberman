@@ -1,5 +1,5 @@
-from Grille import Grille
 from Bomb import Bomb
+import pyxel
 
 class Bomber:
     def __init__(self, name, x, y, grille):

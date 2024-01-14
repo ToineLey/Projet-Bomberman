@@ -1,6 +1,10 @@
 from Terrain import Terrain
 from Bomb import Bomb
-from Bomber import Bomber
+
+
+
+from random import randint
+from Case import Case
 
 class Grille:
     def __init__(self, l: int, h: int):
