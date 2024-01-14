@@ -29,12 +29,11 @@ class Jeu:
            
 
     def draw(self):
-        if self.fin_de_partie == True:
-            pyxel.cls(6)
+        if self.fin_de_partie:
+            pyxel.cls(10)
             for h in range(len(self.grille.cases)):
                 for l in range(len(self.grille.cases[h-1])):
                     casee = self.grille.cases[h][l]
-                    print(casee.terrain)
                     if casee.terrain == 1:
                         pyxel.blt(l*LARG,h*LARG,0,16,0,LARG,LARG)
                     elif casee.terrain == 2:
