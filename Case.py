@@ -1,11 +1,12 @@
 from Terrain import Terrain
 
+
 class Case:
     def __init__(self, x, y, t):
         self.x = x
         self.y = y
         self.terrain = t
-        self.bomb = False
+        self.bomb = None
         self.explosion = 0
         self.player = None
 
@@ -16,8 +17,10 @@ class Case:
             self.player.dead = True
         self.bomb = None
         self.explosion -= 1
+
     def est_libre(self):
-        return self == Terrain.VIDE
+        return self.terrain == Terrain.VIDE and self.player == None
+
     def __str__(self):
         # Ces lignes servent uniquement pour les tests (pour que cela soit plus visuel,je l'accorde ça sert à rien)
         if self.terrain == 1:

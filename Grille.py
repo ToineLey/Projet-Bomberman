@@ -57,7 +57,7 @@ class Grille:
         c = []
         for a in range(len(self.cases)):
             for el in self.cases[a]:
-                if el.explode != 0:
+                if el.explosion != 0:
                     c.append(el)
         return c
 
@@ -66,7 +66,7 @@ class Grille:
         for bomb in self.all_bombs:
             bomb.rebour()
             if bomb.timer == 0:
-                self.exploding_bomb.append(bomb)
+                self.exploding_bombs.append(bomb)
 
     def update_explosions(self, x, y):
         "met a jour les cases en cours d'explosion autour de celle au coordonees x,y"
@@ -79,45 +79,44 @@ class Grille:
 
         while i <= Bomb.portee:
             current_case = self.get(x, y+i)
-            current_case.explosion = 30
+            current_case.explosion = 15
             if current_case.bomb != None:
-                self.exploding_bomb.append(current_case.bomb)
-                break
+                self.exploding_bombs.append(current_case.bomb)
             elif current_case.terrain == Terrain.PILIER:
                 break
+            i+=1
         i = 1
         while i <= Bomb.portee:
             current_case = self.get(x, y-i)
             current_case.explosion = 15
             if current_case.bomb != None:
-                self.exploding_bomb.append(current_case.bomb)
-                break
+                self.exploding_bombs.append(current_case.bomb)
             elif current_case.terrain == Terrain.PILIER:
                 break
+            i+=1
         i = 1
         while i <= Bomb.portee:
             current_case = self.get(x+i, y)
             current_case.explosion = 15
             if current_case.bomb != None:
-                self.exploding_bomb.append(current_case.bomb)
-                break
+                self.exploding_bombs.append(current_case.bomb)
             elif current_case.terrain == Terrain.PILIER:
                 break
+            i+=1
         i = 1
         while i <= Bomb.portee:
             current_case = self.get(x-i, y)
             current_case.explosion = 15
             if current_case.bomb != None:
-                self.exploding_bomb.append(current_case.bomb)
-                break
+                self.exploding_bombs.append(current_case.bomb)
             elif current_case.terrain == Terrain.PILIER:
                 break
+            i+=1
 
     def bombs_explosion(self):
         "fait exploser les bombes"
         for bomb in self.exploding_bombs:
             self.update_explosions(bomb.x, bomb.y)
-        self.explosions()
 
     def explosions(self):
         "explosions des cases"

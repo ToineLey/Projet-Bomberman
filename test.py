@@ -1,11 +1,32 @@
 from Grille import Grille
 from Case import Case
-
-a = Grille(13, 11)
+import pyxel
+"""a = Grille(13, 11)
 a._remplir()
 b = a._affichage()
 for i in range(len(a.cases)):
-    print(b[i])
+    print(b[i])"""
+
+
+
+class App:
+    def __init__(self):
+        pyxel.init(160, 120)
+        self.x = 0
+        pyxel.run(self.update, self.draw)
+
+    def update(self):
+        if pyxel.btn(pyxel.KEY_RIGHT)== True:
+            self.x = (self.x + 1) % pyxel.width
+
+    def draw(self):
+        pyxel.cls(0)
+        pyxel.rect(self.x, 0, 8, 8, 9)
+
+App()
+
+
+
 
 class Case_test(Case):
     def __str__(self):
