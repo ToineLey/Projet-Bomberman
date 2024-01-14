@@ -131,3 +131,4 @@ class Grille:
         self.update_bomb()
         self.bombs_explosion()
         self.explosions()
+

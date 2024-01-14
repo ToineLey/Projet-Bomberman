@@ -14,6 +14,7 @@ class Jeu:
         self.player1 = Bomber('player1', 0, 0, self.grille)
         self.player2 = Bomber('player2', -1, 0, self.grille)
         pyxel.run(self.update,self.draw)
+        self.fin_de_partie = False
 
     def update(self):
         self.player1.deplacement(pyxel.KEY_Z, pyxel.KEY_S, pyxel.KEY_D, pyxel.KEY_Q)
@@ -28,21 +29,21 @@ class Jeu:
            
 
     def draw(self):
-        if self.fin_de_partie == False:
-            pyxel.cls(0)
+        if self.fin_de_partie == True:
+            pyxel.cls(6)
             for h in range(len(self.grille.cases)):
                 for l in range(len(self.grille.cases[h-1])):
                     casee = self.grille.cases[h][l]
+                    print(casee.terrain)
                     if casee.terrain == 1:
-                        pyxel.blt(l*LARG,h*LARG,0,32,0,LARG,LARG)
+                        pyxel.blt(l*LARG,h*LARG,0,16,0,LARG,LARG)
                     elif casee.terrain == 2:
                         pyxel.blt(l*LARG,h*LARG,0,0,0,LARG,LARG)
                     elif casee.player == self.player1:
                         pyxel.blt(l*LARG,h*LARG,1,0,0,LARG,LARG)
                     elif casee.player == self.player2:
-                        pyxel.blt(l*LARG,h*LARG,1,32,0,LARG,LARG)
+                        pyxel.blt(l*LARG,h*LARG,1,16,0,LARG,LARG)
         else:
             pyxel.text(50, 64, 'GAME OVER', 7)
-
 
 Jeu()
