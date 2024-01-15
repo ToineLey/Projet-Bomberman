@@ -107,14 +107,14 @@ class Grille:
 
         case = self.get(x, y)
         case.explosion = 15
+        
         i = 1
-
         while i <= Bomb.portee:
             current_case = self.get(x, y+i)
             current_case.explosion = 15
             if current_case.bomb != None:
                 self.exploding_bombs.append(current_case.bomb)
-            elif current_case.terrain == Terrain.PILIER:
+            elif current_case.terrain == Terrain.PILIER or current_case.terrain == Terrain.BRIQUE:
                 break
             i += 1
 
@@ -124,7 +124,7 @@ class Grille:
             current_case.explosion = 15
             if current_case.bomb != None:
                 self.exploding_bombs.append(current_case.bomb)
-            elif current_case.terrain == Terrain.PILIER:
+            elif current_case.terrain == Terrain.PILIER or current_case.terrain == Terrain.BRIQUE:
                 break
             i += 1
 
@@ -134,7 +134,7 @@ class Grille:
             current_case.explosion = 15
             if current_case.bomb != None:
                 self.exploding_bombs.append(current_case.bomb)
-            elif current_case.terrain == Terrain.PILIER:
+            elif current_case.terrain == Terrain.PILIER or current_case.terrain == Terrain.BRIQUE:
                 break
             i += 1
 
@@ -144,7 +144,7 @@ class Grille:
             current_case.explosion = 15
             if current_case.bomb != None:
                 self.exploding_bombs.append(current_case.bomb)
-            elif current_case.terrain == Terrain.PILIER:
+            elif current_case.terrain == Terrain.PILIER or current_case.terrain == Terrain.BRIQUE:
                 break
             i += 1
 
