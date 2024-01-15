@@ -10,13 +10,13 @@ class Bomber:
         self.y = y
         self.username = name
         self.dead = False
-        self.cool_down = 60
+        self.cool_down = 60  # temps avant de pouvoir poser une bombe
         self.grille.cases[y][x].player = self
 
-        self.slow = 0
+        self.slow = 0  # nombre de frames avant le prochain deplacement possible
 
     def dropbomb(self):
-        "pose d'une bombe si possible"
+        """pose une bombe, si possible, sous ses pied"""
         if self.cool_down == 0 and self.grille.cases[self.y][self.x].bomb is None:
             bombb = Bomb(self.x, self.y)
             self.grille.cases[self.y][self.x].bomb = bombb
@@ -24,13 +24,13 @@ class Bomber:
             self.grille.all_bombs.append(bombb)
 
     def goto(self, x, y):
-        "deplace le joueur en x,y"
+        """deplace le joueur aux coordonnées x,y"""
         self.x = x
         self.y = y
         self.grille.cases[y][x].player = self
 
     def gauche(self):
-        "deplacement vers la gauche"
+        """deplace le joueur vers la gauche si possible"""
         x = self.x - 1
         y = self.y
         if self.grille.cases[y][x].est_libre():
@@ -38,7 +38,7 @@ class Bomber:
             self.goto(x, y)
 
     def droite(self):
-        "deplacement vers la droite"
+        """deplace le joueur vers la droite si possible"""
         x = self.x + 1
         y = self.y
         if self.grille.cases[y][x].est_libre():
@@ -46,7 +46,7 @@ class Bomber:
             self.goto(x, y)
 
     def haut(self):
-        "deplacement vers le haut"
+        """deplace le joueur vers le haut si possible"""
         x = self.x
         y = self.y - 1
         if self.grille.cases[y][x].est_libre():
@@ -54,7 +54,7 @@ class Bomber:
             self.goto(x, y)
 
     def bas(self):
-        "deplacement vers le bas"
+        """deplace le joueur vers le bas si possible"""
         x = self.x
         y = self.y + 1
         if self.grille.cases[y][x].est_libre():
@@ -62,6 +62,7 @@ class Bomber:
             self.goto(x, y)
 
     def deplacement(self, h, b, d, g):
+        """gère les deplacements, si une des touche en argument est pressée"""
         if self.slow == 0:
             if pyxel.btn(h):
                 self.haut()
@@ -77,5 +78,6 @@ class Bomber:
                 self.slow = 5
 
     def update_slow(self):
+        """permet le ralentissement des déplacements, sinon instantanés"""
         if self.slow > 0:
             self.slow -= 1
