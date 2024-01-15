@@ -16,6 +16,7 @@ class Jeu:
         self.player2 = Bomber('player2', -2, 1, self.grille)
         pyxel.run(self.update, self.draw)
 
+
     def update(self):
 
         # déplacements des joueurs
@@ -59,6 +60,7 @@ class Jeu:
 
         if self.player2.dead == True and self.player1.dead == True:
             self.fin_de_partie = 3
+
 
     def draw(self):
         if self.fin_de_partie == 0:
