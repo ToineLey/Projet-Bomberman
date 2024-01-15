@@ -12,4 +12,4 @@ Lancez le fichier Interface.py pour lancer le Bomberman.
 
 - Pour le joueur 2 (bleu)
 	flèches directionnelles pour les déplacements
-	1 (pavé numérique) ou shift: pose d'une bombe
+	1 (pavé numérique) ou shift droit: pose d'une bombe
