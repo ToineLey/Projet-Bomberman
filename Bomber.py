@@ -13,6 +13,8 @@ class Bomber:
         self.cool_down = 60
         self.grille.cases[y][x].player = self
 
+        self.slow = 0
+
     def dropbomb(self):
         "pose d'une bombe si possible"
         if self.cool_down == 0 and self.grille.cases[self.y][self.x].bomb is None:
@@ -60,11 +62,17 @@ class Bomber:
             self.goto(x, y)
 
     def deplacement(self, h, b, d, g):
-        if pyxel.btn(h):
-            self.haut()
-        elif pyxel.btn(b):
-            self.bas()
-        elif pyxel.btn(d):
-            self.droite()
-        elif pyxel.btn(g):
-            self.gauche()
+        if self.slow == 0:
+            if pyxel.btn(h):
+                self.haut()
+            elif pyxel.btn(b):
+                self.bas()
+            elif pyxel.btn(d):
+                self.droite()
+            elif pyxel.btn(g):
+                self.gauche()
+            self.slow = 10
+
+    def update_slow(self):
+        if self.slow > 0:
+            self.slow -= 1

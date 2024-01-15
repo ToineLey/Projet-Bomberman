@@ -20,6 +20,9 @@ class Jeu:
 
         # déplacements des joueurs
 
+        self.player1.update_slow()
+        self.player1.update_slow()
+
         self.player1.deplacement(
             pyxel.KEY_Z, pyxel.KEY_S, pyxel.KEY_D, pyxel.KEY_Q)
         self.player2.deplacement(
