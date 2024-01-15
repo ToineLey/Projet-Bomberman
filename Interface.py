@@ -3,14 +3,15 @@ from Bomber import Bomber
 from Grille import Grille
 
 LARGEUR_SPRITE = 16
-
+HAUTEUR = 13
+LARGEUR = 11
 
 class Jeu:
     def __init__(self):
-        pyxel.init(240, 208)
+        pyxel.init((HAUTEUR+2)*16, (LARGEUR+2)*16)
         pyxel.load("resources.pyxres")
         self.fin_de_partie = 0
-        self.grille = Grille(13, 11)
+        self.grille = Grille(HAUTEUR, LARGEUR)
         self.grille.remplir_niveau_1()
         self.player1 = Bomber('player1', 1, 1, self.grille)
         self.player2 = Bomber('player2', -2, 1, self.grille)
@@ -35,7 +36,7 @@ class Jeu:
         if pyxel.btn(pyxel.KEY_E):
             self.player1.dropbomb()
 
-        if pyxel.btn(pyxel.KEY_KP_1) or pyxel.btn(pyxel.KEY_END):
+        if pyxel.btn(pyxel.KEY_KP_1) or pyxel.btn(pyxel.KEY_RSHIFT):
             self.player2.dropbomb()
 
         # mise à jour de la grille des bombes
