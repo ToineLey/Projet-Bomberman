@@ -1,10 +1,8 @@
 from Terrain import Terrain
 from Bomb import Bomb
-
-
-
 from random import randint
 from Case import Case
+
 
 class Grille:
     def __init__(self, l: int, h: int):
@@ -14,10 +12,17 @@ class Grille:
         self.exploding_bombs = []
         self.all_bombs = []
 
-    def _remplir(self):
+    def remplir_niveau_1(self):
+
+        # cette méthode sert à remplir la grille de jeu pour que cela soit le niveau 1
+
         hauteur = self.hauteur+2
         largeur = self.largeur+2
-        def espacement_piliers():          
+
+        def espacement_piliers():
+            
+            # cette fonction sert à ajouter un espacement entre les piliers
+
             return (
                 x not in (1, largeur-2) and
                 y not in (1, hauteur-2) and
@@ -26,15 +31,25 @@ class Grille:
             )
 
         def depart():
+
+            # cette fonction sert à ajouter les zones de départ pour les joueurs
+
             return (
                 y in (1, 2) and
                 x in (1, 2, largeur-3, largeur-2)
             )
+
         def contour():
+
+            # cette fonction sert à ajouter le contour de la zone de jeu (c'est pour pas se téléporter de l'autre côté de la grille)
+
             return (
-                x in (0,largeur-1) or
-                y in (0,hauteur-1)
+                x in (0, largeur-1) or
+                y in (0, hauteur-1)
             )
+        
+        # la boucle suivante sert à remplir la grille de jeu
+
         for y in range(len(self.cases)):
             for x in self.cases[y]:
                 alea = randint(1, 100)
@@ -51,6 +66,9 @@ class Grille:
                         self.cases[y][x] = Case(y, x, Terrain.BRIQUE)
 
     def _affichage(self):
+
+        # cette partie n'est utile uniquement dans les tests
+
         t2 = []
         for a in range(len(self.cases)):
             t1 = []
@@ -93,7 +111,7 @@ class Grille:
                 self.exploding_bombs.append(current_case.bomb)
             elif current_case.terrain == Terrain.PILIER:
                 break
-            i+=1
+            i += 1
         i = 1
         while i <= Bomb.portee:
             current_case = self.get(x, y-i)
@@ -102,7 +120,7 @@ class Grille:
                 self.exploding_bombs.append(current_case.bomb)
             elif current_case.terrain == Terrain.PILIER:
                 break
-            i+=1
+            i += 1
         i = 1
         while i <= Bomb.portee:
             current_case = self.get(x+i, y)
@@ -111,7 +129,7 @@ class Grille:
                 self.exploding_bombs.append(current_case.bomb)
             elif current_case.terrain == Terrain.PILIER:
                 break
-            i+=1
+            i += 1
         i = 1
         while i <= Bomb.portee:
             current_case = self.get(x-i, y)
@@ -120,7 +138,7 @@ class Grille:
                 self.exploding_bombs.append(current_case.bomb)
             elif current_case.terrain == Terrain.PILIER:
                 break
-            i+=1
+            i += 1
 
     def bombs_explosion(self):
         "fait exploser les bombes"

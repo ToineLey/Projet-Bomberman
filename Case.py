@@ -22,12 +22,16 @@ class Case:
         return self.terrain == Terrain.VIDE and self.player == None
 
     def __str__(self):
-        # Ces lignes servent uniquement pour les tests (pour que cela soit plus visuel,je l'accorde ça sert à rien)
+        # Ces lignes servent uniquement pour les tests (pour que cela soit plus visuel)
         if self.terrain == 1:
             return '▒▒'
-        elif self.terrain == 0 and self.player is None:
+        elif self.terrain == 0 and self.player is None and self.bomb is None and self.explosion == 0:
             return '  '
         elif self.terrain == 2:
             return '██'
+        elif self.bomb is not None:
+            return '!!'
         elif self.player is not None:
             return '()'
+        elif self.explosion != 0:
+            return '**'
