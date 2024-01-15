@@ -11,14 +11,20 @@ class Case:
         self.player = None
 
     def explode(self):
+        """gère l'explosion d'une bombe sur la case"""
+
         if self.terrain == Terrain.BRIQUE:
-            self.terrain = Terrain.VIDE
+            self.terrain = Terrain.VIDE 
+
         elif self.player != None:
             self.player.dead = True
+            
         self.bomb = None
         self.explosion -= 1
 
     def est_libre(self):
+        """teste si la case est vide et qu'il n'y a pas de joueur"""
+
         return self.terrain == Terrain.VIDE and self.player == None
 
     def __str__(self):

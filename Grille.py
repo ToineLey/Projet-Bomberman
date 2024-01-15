@@ -13,15 +13,13 @@ class Grille:
         self.all_bombs = []
 
     def remplir_niveau_1(self):
-
-        # cette méthode sert à remplir la grille de jeu pour que cela soit le niveau 1
+        """cette méthode sert à remplir la grille de jeu pour que cela soit le niveau 1"""
 
         hauteur = self.hauteur+2
         largeur = self.largeur+2
 
         def espacement_piliers():
-            
-            # cette fonction sert à ajouter un espacement entre les piliers
+            """cette fonction sert à ajouter un espacement entre les piliers"""
 
             return (
                 x not in (1, largeur-2) and
@@ -31,8 +29,7 @@ class Grille:
             )
 
         def depart():
-
-            # cette fonction sert à ajouter les zones de départ pour les joueurs
+            """cette fonction sert à ajouter les zones de départ pour les joueurs"""
 
             return (
                 y in (1, 2) and
@@ -40,14 +37,13 @@ class Grille:
             )
 
         def contour():
-
-            # cette fonction sert à ajouter le contour de la zone de jeu (c'est pour pas se téléporter de l'autre côté de la grille)
+            """cette fonction sert à ajouter le contour de la zone de jeu (c'est pour pas se téléporter de l'autre côté de la grille)"""
 
             return (
                 x in (0, largeur-1) or
                 y in (0, hauteur-1)
             )
-        
+
         # la boucle suivante sert à remplir la grille de jeu
 
         for y in range(len(self.cases)):
@@ -66,8 +62,7 @@ class Grille:
                         self.cases[y][x] = Case(y, x, Terrain.BRIQUE)
 
     def _affichage(self):
-
-        # cette partie n'est utile uniquement dans les tests
+        """cette partie n'est utile uniquement dans les tests"""
 
         t2 = []
         for a in range(len(self.cases)):
@@ -78,9 +73,13 @@ class Grille:
         return t2
 
     def get(self, x: int, y: int):
+        """ça permet de récupérer la case au coordonnés (x;y)"""
+
         return self.cases[y][x]
 
-    def get_explosions(self):
+    def get_explosions(self) -> list:
+        """ça permet de savoir quelles bombes sont actuellement placés"""
+
         c = []
         for a in range(len(self.cases)):
             for el in self.cases[a]:
@@ -101,8 +100,6 @@ class Grille:
         case = self.get(x, y)
         case.explosion = 15
         i = 1
-
-        # Partie qui suit à optimiser (jusqu'à la ligne 100)
 
         while i <= Bomb.portee:
             current_case = self.get(x, y+i)
@@ -154,6 +151,8 @@ class Grille:
         self.exploding_bombs = []
 
     def manage_bombs(self):
+        """gère tout ce qui ce passe au niveau des bombes"""
+
         self.update_bomb()
         self.bombs_explosion()
         self.explosions()

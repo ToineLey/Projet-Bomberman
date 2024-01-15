@@ -19,12 +19,13 @@ class Jeu:
     def update(self):
 
         # déplacements des joueurs
-
+        
         self.player1.update_slow()
-        self.player1.update_slow()
+        self.player2.update_slow()
 
         self.player1.deplacement(
             pyxel.KEY_Z, pyxel.KEY_S, pyxel.KEY_D, pyxel.KEY_Q)
+        
         self.player2.deplacement(
             pyxel.KEY_UP, pyxel.KEY_DOWN, pyxel.KEY_RIGHT, pyxel.KEY_LEFT)
 
@@ -33,8 +34,10 @@ class Jeu:
         if pyxel.btn(pyxel.KEY_E):
             self.player1.dropbomb()
 
-        if pyxel.btn(pyxel.KEY_KP_1):
+        if pyxel.btn(pyxel.KEY_KP_1) or pyxel.btn(pyxel.KEY_END):
             self.player2.dropbomb()
+
+        
 
         # mise à jour de la grille des bombes
 
@@ -68,8 +71,6 @@ class Jeu:
             for h in range(len(self.grille.cases)):
                 for l in range(len(self.grille.cases[h-1])):
                     casee = self.grille.cases[h][l]
-                    if casee.bomb is not None:
-                        print(casee.bomb.timer)
                     if casee.explosion != 0:
                         pyxel.blt(l*LARGEUR_SPRITE, h*LARGEUR_SPRITE, 0, 32, 0, LARGEUR_SPRITE, LARGEUR_SPRITE)
                     if casee.bomb is not None:

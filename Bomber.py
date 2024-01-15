@@ -65,13 +65,16 @@ class Bomber:
         if self.slow == 0:
             if pyxel.btn(h):
                 self.haut()
+                self.slow = 5
             elif pyxel.btn(b):
                 self.bas()
+                self.slow = 5
             elif pyxel.btn(d):
                 self.droite()
+                self.slow = 5
             elif pyxel.btn(g):
                 self.gauche()
-            self.slow = 10
+                self.slow = 5
 
     def update_slow(self):
         if self.slow > 0:
