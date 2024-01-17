@@ -10,7 +10,7 @@ class Bomber:
         self.y = y
         self.username = name
         self.dead = False
-        self.cool_down = 60  # temps avant de pouvoir poser une bombe
+        self.cool_down = 0  # temps avant de pouvoir poser une bombe
         self.grille.cases[y][x].player = self
 
         self.slow = 0  # nombre de frames avant le prochain deplacement possible
